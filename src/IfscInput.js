@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import IFscCode from "./IfscCode";
+import Loading from "./Loading";
 import { Table, Dimmer, Loader, Image, Segment } from "semantic-ui-react";
 
 const url = "https://ifsc.razorpay.com/";
@@ -41,9 +42,10 @@ class IfscInput extends Component {
   render() {
     return (
       <React.Fragment>
+          <div style={{display:'flex' , justifyContent:  'center '}}>
         <div
           className="ui action input"
-          style={{ marginBottom: "10px", marginTop: "10px" }}
+          style={{ marginBottom: "10px", marginTop: "10px" , alignItems:'center'}}
         >
           <input
             type="text"
@@ -55,16 +57,12 @@ class IfscInput extends Component {
             Search
           </button>
         </div>
-        {this.state.loading ? 
-          <Segment>
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-            <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
-          </Segment>
-         : 
+        </div >
+        {this.state.loading ? (
+          <Loading />
+        ) : (
           <IFscCode bankDetails={this.state.bankDetails} />
-        }
+        )}
       </React.Fragment>
     );
   }
